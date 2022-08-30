@@ -56,7 +56,7 @@
       environmentFile = "/run/secrets/wifi.env";
       networks = {
         "@SSID_HOME@" = {
-          pskRaw = "@PSK_HOME@";
+          pskRaw = "@PSKRAW_HOME@";
         };
       };
     };
