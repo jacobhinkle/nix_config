@@ -24,6 +24,7 @@
     secrets."spotify/password".owner = "jacob";
     secrets."email/gmail/password".owner = "jacob";
     secrets."email/jhink/password".owner = "jacob";
+    secrets."wifi/env" = {};
   };
 
   boot = {
@@ -53,7 +54,7 @@
     wireless = {
       enable = true;
       userControlled.enable = true;
-      environmentFile = "/run/secrets/wifi.env";
+      environmentFile = "/run/secrets/wifi/env";
       networks = {
         "@SSID_HOME@" = {
           pskRaw = "@PSKRAW_HOME@";
