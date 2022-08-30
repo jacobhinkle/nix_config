@@ -117,7 +117,7 @@
       enable = true;
       font = {
         name = "Hack";
-        size = 26;
+        size = 16;
       };
     };
     mbsync = {
