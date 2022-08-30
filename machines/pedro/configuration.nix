@@ -122,31 +122,7 @@
   virtualisation.oci-containers.containers = let
     serverIP = "192.168.88.21";
   in {
-    pihole = {
-      image = "pihole/pihole:2022.07.1";
-      ports = [
-        "${serverIP}:53:53/tcp"
-        "${serverIP}:53:53/udp"
-        "8088:80"
-        "4438:443"
-      ];
-      environment = {
-        TZ = "America/New_York";
-        ServerIP = serverIP;
-        WEBPASSWORD_FILE = "/run/secrets/pihole/webpassword";
-      };
-      #extraDockerOptions = [
-        ##"--cap-add=NET_ADMIN"
-        #"--dns=127.0.0.1"
-        #"--dns=1.1.1.1"
-      #];
-      volumes = [
-        "/serverdata/pihole/etc/pihole:/etc/pihole"
-        "/serverdata/pihole/etc/dnsmasq.d:/etc/dnsmasq.d"
-        "/run/secrets/pihole:/run/secrets/pihole"
-      ];
-      #workdir = "/serverdata/pihole/etc/pihole";
-    };
+    pihole = import ./pihole.nix serverIP;
   };
 
   # List services that you want to enable:
