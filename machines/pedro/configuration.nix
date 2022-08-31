@@ -66,7 +66,10 @@
         8384 22000  # syncthing
         8080 8443 6789 8880 8843 27117  # unifi controller: https://help.ui.com/hc/en-us/articles/218506997-UniFi-Network-Required-Ports-Reference
         53 8088  # pihole
-        3000  # gitea
+        #3000  # gitea
+        #8081  # vaultwarden
+        #8000  # paperless
+        80 443  # reverse proxy
       ];
       allowedUDPPorts = [
         22000 21027  # syncthing
@@ -119,6 +122,14 @@
 
   security.rtkit.enable = true;  # recommended for pipewire
 
+  # enable acme for certbot
+  security.acme = {
+    acceptTerms  = true;
+    defaults = {
+      email = "jacob.hinkle@gmail.com";
+    };
+  };
+
   virtualisation.oci-containers.containers = let
     serverIP = "192.168.88.21";
   in {
@@ -137,6 +148,8 @@
       };
       stateDir = "/serverdata/gitea";
     };
+
+    nginx = import ./nginx.nix;
 
     # Enable the OpenSSH daemon.
     openssh.enable = true;
@@ -162,6 +175,14 @@
       enable = true;
       openFirewall = true;
       unifiPackage = pkgs.unifiStable;
+    };
+
+    vaultwarden = {
+      enable = true;
+      config = {
+        domain = "http://pedro:8081";
+        signupsAllowed = true;
+      };
     };
 
     # Enable the X11 windowing system.
