@@ -140,16 +140,7 @@
   services = {
     chrony.enable = true;
 
-    gitea = {
-      enable = true;
-      domain = "git.jhink.org";
-      rootUrl = "https://git.jhink.org";
-      lfs = {
-        enable = true;
-        contentDir = "/serverdata/gitea/lfs_content";
-      };
-      stateDir = "/serverdata/gitea";
-    };
+    gitea = import ./gitea.nix;
 
     nginx = import ./nginx.nix;
 
