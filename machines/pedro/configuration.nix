@@ -142,6 +142,8 @@
 
     gitea = {
       enable = true;
+      domain = "git.jhink.org";
+      rootUrl = "https://git.jhink.org";
       lfs = {
         enable = true;
         contentDir = "/serverdata/gitea/lfs_content";
