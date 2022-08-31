@@ -167,8 +167,12 @@
         plugins = [
           "git" "sudo" "vi-mode"
         ];
-        theme = "clean";
+        theme = "michelebologna";  # nice clean theme that shows jobs
       };
+      # michelebologna theme doesn't have an RPROMPT, but I like the one from the clean theme
+      initExtra = ''
+        RPROMPT='[%*]'
+      '';
     };
   };
 
