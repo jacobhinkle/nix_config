@@ -195,7 +195,7 @@
       };
     };
     syncthing = {
-      enable = true;
+      enable = false;
       # cause the tray command to wait for the service and tray manager to start
       #extraOptions = [ "--wait" ];
       tray.enable = false;
