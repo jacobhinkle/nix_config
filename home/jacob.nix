@@ -133,6 +133,7 @@
       enable = true;
       extraConfig = ''
         config.pdfjs = True
+        c.colors.webpage.preferred_color_scheme = 'dark'
 
         # Redirect to old.reddit.com
         # from: https://www.reddit.com/r/qutebrowser/comments/n90y93/a_simple_script_to_convert_reddit_links_to/
