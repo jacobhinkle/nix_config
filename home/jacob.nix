@@ -129,6 +129,15 @@
         vim-nix
       ];
     };
+    qutebrowser = {
+      enable = true;
+      keyBindings = {
+        normal = {
+          "<Shift-J>" = "tab-prev";
+          "<Shift-K>" = "tab-next";
+        };
+      };
+    };
     rbw = {
       enable = true;
       settings.email = "jacob.hinkle@gmail.com";
@@ -165,7 +174,10 @@
       oh-my-zsh = {
         enable = true;
         plugins = [
-          "git" "sudo" "vi-mode"
+         "direnv"
+         "git"
+         "sudo"
+         "vi-mode"
         ];
         theme = "michelebologna";  # nice clean theme that shows jobs
       };
