@@ -4,7 +4,7 @@ rec {
   modifier = "Mod1";
   terminal = "kitty";
   keybindings = let
-    browser = "firefox";
+    browser = "qutebrowser";
     scrot2clip = pkgs.writeShellScript "scrot2clip"
       "${pkgs.scrot}/bin/scrot -s - | ${pkgs.xclip}/bin/xclip -selection primary -i -t image/png";
   in {
