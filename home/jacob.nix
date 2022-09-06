@@ -131,6 +131,9 @@
     };
     qutebrowser = {
       enable = true;
+      extraConfig = ''
+        config.pdfjs = True
+      '';
       keyBindings = {
         normal = {
           "<Shift-J>" = "tab-prev";
