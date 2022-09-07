@@ -154,6 +154,10 @@
       };
     };
     tmux = import ./tmux.nix;
+    xmobar = {
+      enable = true;
+      extraConfig = builtins.readFile ./xmobarrc;
+    };
     zsh = {
       enable = true;
       enableSyntaxHighlighting = true;
@@ -207,9 +211,23 @@
 
   xsession = {
     enable = true;
-    windowManager.i3 = {
-      enable = true;
-      config = import ./i3.nix pkgs;
+    windowManager = {
+      i3 = {
+        enable = false;
+        config = import ./i3.nix pkgs;
+      };
+      xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+        extraPackages = haskellPackages: with haskellPackages; [
+          #dbus
+          #List
+          #monad-logger
+          xmonad
+          xmonad-contrib
+        ];
+        config = ./xmonad.hs;
+      };
     };
   };
 }
