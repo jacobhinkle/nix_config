@@ -1,12 +1,15 @@
 -- See https://xmonad.org/TUTORIAL.html
 import XMonad
 
+import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.RotSlaves
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+
+import qualified XMonad.StackSet as W
 
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers
@@ -26,16 +29,28 @@ myConfig = def
     { terminal = "kitty tmux new"
     , modMask = mod1Mask
     , borderWidth = 1
---    , workspaces = myWorkspaces
+    , workspaces = myWorkspaces
     , layoutHook = myLayout
     }
    `additionalKeysP`
-   [ ("M-'", spawn "qutebrowser")
+   ([
+   -- launch programs
+     ("M-'", spawn "qutebrowser")
    , ("M-s", spawn "scrot -s")
+   -- cycle windows within a workspace
    , ("M-a", rotAllUp)
    , ("M-f", rotAllDown)
+   -- switch to previous workspace
+   , ("M-;", toggleWS)
+   -- Warn (disable shutting down xmonad since we can do that in other ways from a terminal...
    , ("M-S-q", spawn "kitty --hold echo M-S-q quits XMonad\\! You probably meant to use M-S-c to close the current window.")
    ]
+   ++
+   -- access additional workspaces
+   [("M-" ++ w, windows $ W.greedyView w) | w <- addlWorkspaces]
+   ++
+   [("M-S-" ++ w, windows $ W.shift w) | w <- addlWorkspaces]
+   )
 
 myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
   where
@@ -74,4 +89,8 @@ myXmobarPP = def
     red      = xmobarColor "#ff5555" ""
     lowWhite = xmobarColor "#bbbbbb" ""
 
---myWorkspaces = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "=" ]
+addlWorkspaces :: [String]
+addlWorkspaces = ["0", "-", "=", "i"]
+
+myWorkspaces :: [String]
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"] ++ addlWorkspaces
