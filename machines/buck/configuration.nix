@@ -1,14 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, sops, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  sops,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   sops = {
     # This will add secrets.yml to the nix store
@@ -16,7 +18,7 @@
     # sops.defaultSopsFile = "/root/.sops/secrets/example.yaml";
     defaultSopsFile = ../../secrets.yaml;
     # This will automatically import SSH keys as age keys
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     # This is using an age key that is expected to already be in the filesystem
     #age.keyFile = "/var/lib/sops-nix/key.txt";
     # This will generate a new key if the key specified above does not exist
@@ -43,7 +45,7 @@
     environmentFile = "/run/secrets/wifi/env";
     networks = {
       "@SSID_HOME@" = {
-	pskRaw = "@PSKRAW_HOME@";
+        pskRaw = "@PSKRAW_HOME@";
       };
     };
   };
@@ -60,7 +62,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -85,7 +86,7 @@
   # List services that you want to enable:
   # Enable sound.
   sound.enable = true;
-  
+
   #hardware.raspberry-pi."4".fkms-3d.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager). services.xserver.libinput.enable = true;
@@ -93,11 +94,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jacob = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
-  security.rtkit.enable = true;  # recommended for pipewire
+  security.rtkit.enable = true; # recommended for pipewire
 
   # List services that you want to enable:
   services = {
@@ -133,7 +134,7 @@
           enable = true;
           greeter.enable = false;
         };
-      }; 
+      };
       libinput = {
         enable = true;
         touchpad = {
@@ -148,7 +149,7 @@
           i3status # gives you the default i3 status bar
           i3lock #default i3 screen locker
           i3blocks #if you are planning on using i3blocks over i3status
-       ];
+        ];
       };
     };
   };
@@ -179,6 +180,6 @@
     gc = {
       automatic = true;
     };
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = ["nix-command" "flakes"];
   };
 }

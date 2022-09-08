@@ -1,5 +1,4 @@
-serverIP :
-{
+serverIP: {
   image = "pihole/pihole:2022.07.1";
   ports = [
     "${serverIP}:53:53/tcp"
@@ -21,6 +20,6 @@ serverIP :
     "/run/secrets/pihole:/run/secrets/pihole"
   ];
   extraOptions = [
-    "--no-hosts"  # do not populate internal /etc/hosts with container host's
+    "--no-hosts" # do not populate internal /etc/hosts with container host's
   ];
 }

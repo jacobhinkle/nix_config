@@ -1,7 +1,7 @@
 {
   enable = true;
   aggressiveResize = true;
-  clock24 =  true;
+  clock24 = true;
   escapeTime = 0;
   historyLimit = 10000;
   keyMode = "vi";
@@ -26,6 +26,6 @@
     set-window-option -g window-status-current-style fg=red
     # align center the window list
     set -g status-justify centre
-    
+
   '';
 }

@@ -1,10 +1,14 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
-    ({ lib, ...}: {
-      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "zoom"
-      ];
+    ({lib, ...}: {
+      nixpkgs.config.allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [
+          "zoom"
+        ];
     })
   ];
 
@@ -16,7 +20,7 @@
 
     keyboard = {
       layout = "us";
-      options = [ "caps:swapescape" "ctrl:ralt_rctrl" ];
+      options = ["caps:swapescape" "ctrl:ralt_rctrl"];
     };
 
     packages = with pkgs; [
@@ -58,8 +62,8 @@
     stateVersion = "22.05";
   };
 
-  accounts.email = {
-    accounts.gmail = {
+  accounts.email.accounts = {
+    gmail = {
       address = "jacob.hinkle@gmail.com";
       passwordCommand = "${pkgs.coreutils}/bin/cat /run/secrets/email/gmail/password";
       flavor = "gmail.com";
@@ -71,7 +75,7 @@
       primary = true;
       realName = "Jacob Hinkle";
     };
-    accounts.jhink = {
+    jhink = {
       address = "jacob.hinkle@jhink.org";
       imap.host = "mail.privateemail.com";
       smtp.host = "mail.privateemail.com";
@@ -132,6 +136,7 @@
         vim-nix
       ];
     };
+    #notmuch.enable = true;
     qutebrowser = import ./qutebrowser.nix;
     rbw = {
       enable = true;
@@ -174,12 +179,12 @@
       oh-my-zsh = {
         enable = true;
         plugins = [
-         "direnv"
-         "git"
-         "sudo"
-         "vi-mode"
+          "direnv"
+          "git"
+          "sudo"
+          "vi-mode"
         ];
-        theme = "michelebologna";  # nice clean theme that shows jobs
+        theme = "michelebologna"; # nice clean theme that shows jobs
       };
       # michelebologna theme doesn't have an RPROMPT, but I like the one from the clean theme
       initExtra = ''
@@ -223,13 +228,14 @@
       xmonad = {
         enable = true;
         enableContribAndExtras = true;
-        extraPackages = haskellPackages: with haskellPackages; [
-          #dbus
-          #List
-          #monad-logger
-          xmonad
-          xmonad-contrib
-        ];
+        extraPackages = haskellPackages:
+          with haskellPackages; [
+            #dbus
+            #List
+            #monad-logger
+            xmonad
+            xmonad-contrib
+          ];
         config = ./xmonad.hs;
       };
     };

@@ -24,15 +24,20 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, sops-nix, ... }:
-  let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixos-hardware,
+    home-manager,
+    sops-nix,
+    ...
+  }: let
     system = "x86_64-linux";
-    homeManagerConfFor = config: { ... }: {
-        #nixpkgs.overlays = [ nur.overlay ];
-        imports = [ config ];
-      };
+    homeManagerConfFor = config: {...}: {
+      #nixpkgs.overlays = [ nur.overlay ];
+      imports = [config];
+    };
   in {
-
     nixosConfigurations = {
       # Thinkpad T470 laptop
       buck = nixpkgs.lib.nixosSystem {
@@ -40,7 +45,8 @@
         modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-t470s
           ./machines/buck/configuration.nix
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager
+          {
             home-manager.useUserPackages = true;
             home-manager.users.jacob = homeManagerConfFor ./home/jacob.nix;
           }
@@ -53,8 +59,9 @@
         modules = [
           nixos-hardware.nixosModules.common-pc-hdd
           nixos-hardware.nixosModules.common-cpu-intel-cpu-only
-          ./machines/pedro/configuration.nix 
-          home-manager.nixosModules.home-manager {
+          ./machines/pedro/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
             home-manager.useUserPackages = true;
             home-manager.users.jacob = homeManagerConfFor ./home/jacob.nix;
           }

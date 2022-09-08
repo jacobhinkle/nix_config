@@ -2,7 +2,7 @@
   enable = true;
   recommendedProxySettings = true;
   virtualHosts = let
-    simpleProxy = ip : {
+    simpleProxy = ip: {
       forceSSL = true;
       enableACME = true;
       extraConfig = ''
