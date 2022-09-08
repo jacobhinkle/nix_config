@@ -106,10 +106,14 @@
       userName = "Jacob Hinkle";
       userEmail = "jacob.hinkle@jhink.org";
       lfs.enable = true;
-      delta.enable = true;
+      difftastic = {
+        enable = true;
+        background = "dark";
+      };
       aliases = {
-        s = "status";
         ci = "commit";
+        lg = "log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30";
+        s = "status";
       };
     };
     htop.enable = true;
