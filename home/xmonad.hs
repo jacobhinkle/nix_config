@@ -23,7 +23,7 @@ main = xmonad
     $ myConfig
 
 myConfig = def
-    { terminal = "kitty"
+    { terminal = "kitty tmux new"
     , modMask = mod1Mask
     , borderWidth = 1
 --    , workspaces = myWorkspaces
@@ -34,6 +34,7 @@ myConfig = def
    , ("M-s", spawn "scrot -s")
    , ("M-a", rotAllUp)
    , ("M-f", rotAllDown)
+   , ("M-S-q", spawn "kitty --hold echo M-S-q quits XMonad\\! You probably meant to use M-S-c to close the current window.")
    ]
 
 myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
