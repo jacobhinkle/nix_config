@@ -52,7 +52,7 @@ myConfig = def
    [("M-S-" ++ w, windows $ W.shift w) | w <- addlWorkspaces]
    )
 
-myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
+myLayout =  threeCol ||| tiled ||| Mirror tiled ||| Full
   where
     --threeCol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
     threeCol = ThreeColMid nmaster delta ratio
