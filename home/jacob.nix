@@ -88,9 +88,7 @@
   };
 
   programs = {
-    bat = {
-      enable = true;
-    };
+    bat.enable = true;
     direnv = {
       enable = true;
       enableZshIntegration = true;
@@ -109,10 +107,12 @@
       userEmail = "jacob.hinkle@jhink.org";
       lfs.enable = true;
       delta.enable = true;
+      aliases = {
+        s = "status";
+        ci = "commit";
+      };
     };
-    htop = {
-      enable = true;
-    };
+    htop.enable = true;
     kitty = {
       enable = true;
       font = {
@@ -120,9 +120,8 @@
         size = 16;
       };
     };
-    mbsync = {
-      enable = true;
-    };
+    lazygit.enable = true;
+    mbsync.enable = true;
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
@@ -162,6 +161,7 @@
       enable = true;
       enableSyntaxHighlighting = true;
       shellAliases = {
+        lg = "lazygit";
         vim = "nvim";
       };
       sessionVariables = {
