@@ -27,11 +27,13 @@
       age
       bitwarden
       chromium
+      fd
       feh
       file
       #freecad
       #gnumake
       hack-font
+      jq
       inconsolata
       libreoffice
       logseq
