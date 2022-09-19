@@ -50,8 +50,13 @@
       sxiv
       #texlive.combined.scheme-full
       xclip
+      zathura
       zoom-us
     ];
+
+    sessionVariables = {
+      QT_ENABLE_HIGHDPI_SCALING = 1;
+    };
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -62,6 +67,19 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "22.05";
+  };
+
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      associations.added = {
+        "application/pdf" = ["zathura.desktop"];
+      };
+      defaultApplications = {
+        "application/pdf" = ["zathura.desktop"];
+      };
+    };
   };
 
   accounts.email.accounts = {
@@ -127,16 +145,30 @@
       enable = true;
       font = {
         name = "Hack";
-        size = 16;
+        size = 24;
       };
     };
     lazygit.enable = true;
     mbsync.enable = true;
     neovim = {
       enable = true;
+      extraConfig = ''
+        set tabstop=4
+        set softtabstop=4 " enables backspacing, etc
+        set shiftwidth=4
+        set expandtab
+        set tw=80
+
+        set bs=2		" allow backspacing over everything in insert mode
+        set ai			" always set autoindenting on
+      '';
       plugins = with pkgs.vimPlugins; [
+        ctrlp
+        gundo
+        python-mode
         vim-nix
       ];
+      vimAlias = true;
     };
     #notmuch.enable = true;
     qutebrowser = import ./qutebrowser.nix;
