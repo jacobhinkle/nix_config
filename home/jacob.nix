@@ -31,6 +31,7 @@
       feh
       file
       #freecad
+      fzf
       #gnumake
       hack-font
       jq
@@ -42,10 +43,12 @@
       #openscad
       #pandoc
       pavucontrol
+      ripgrep
       scli
       scrot
       signal-desktop
       sops
+      speedcrunch
       spotify-tui
       sxiv
       #texlive.combined.scheme-full
@@ -161,11 +164,19 @@
 
         set bs=2		" allow backspacing over everything in insert mode
         set ai			" always set autoindenting on
+
+        set number relativenumber
+        set colorcolumn=100
       '';
       plugins = with pkgs.vimPlugins; [
-        ctrlp
-        gundo
+        #context-vim
+        #ctrlp
+        #fzf
+        #gundo
         python-mode
+        #telescope-nvim
+        #telescope-fzf-native-nvim
+        #nvim-treesitter
         vim-nix
       ];
       vimAlias = true;
@@ -209,6 +220,7 @@
       };
       sessionVariables = {
         EDITOR = "nvim";
+        FZF_DEFAULT_OPTS = "--layout=reverse --inline-info --height=40% --border";
       };
       oh-my-zsh = {
         enable = true;
@@ -217,12 +229,27 @@
           "git"
           "sudo"
           "vi-mode"
+          "fzf"
         ];
         theme = "michelebologna"; # nice clean theme that shows jobs
       };
-      # michelebologna theme doesn't have an RPROMPT, but I like the one from the clean theme
       initExtra = ''
+        # michelebologna theme doesn't have an RPROMPT, but I like the one from
+        # the clean theme
         RPROMPT='[%*]'
+
+        # wrap the fzf command with some killable helpers
+        function vif() {
+            local fname
+            fname=$(fzf) || return
+            vim "$fname"
+        }
+
+        function fcd() {
+            local dirname
+            dirname=$(find -type d | fzf) || return
+            cd "$dirname"
+        }
       '';
     };
   };
