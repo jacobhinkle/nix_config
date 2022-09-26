@@ -37,6 +37,10 @@ myConfig = def
    -- launch programs
      ("M-'", spawn "qutebrowser")
    , ("M-s", spawn "scrot -s")
+   -- xrandr commands for when (dis)connecting from external monitor
+   -- I have temporarily given up on using autorandr fo rthis
+   , ("M-x", spawn "xrandr --output DP-1 --auto --output eDP-1 --off") -- external
+   , ("M-c", spawn "xrandr --output eDP-1 --auto --output DP-1 --off") -- laptop only
    -- cycle windows within a workspace
    , ("M-a", rotAllUp)
    , ("M-f", rotAllDown)
